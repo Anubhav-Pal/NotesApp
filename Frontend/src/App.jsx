@@ -9,6 +9,11 @@ const App = () => {
     title: '',
     body: ''
   })
+  const [editForm, setEditForm] = useState({
+    _id: '',
+    title: '',
+    body: ''
+  })
 
   // useeffects
   useEffect(() => {
@@ -33,6 +38,15 @@ const App = () => {
       ...createForm,
       [name]: value
     });
+  }
+
+  const updateEditFormField = (e) => {
+    const { name, value } = e.target;
+
+    setEditForm({
+      ...editForm,
+      [name]: value
+    })
   }
 
 
@@ -68,11 +82,39 @@ const App = () => {
           'Content-Type': 'application/json',
         }
       })
-      //Update the state
-      .then(setNotes((notes) => notes.filter((note) => note._id !== _id)))
+        //Update the state
+        .then(setNotes((notes) => notes.filter((note) => note._id !== _id)))
     } catch (error) { console.log(error); }
   }
 
+  //Update the note
+  const updateNote = async (e) => {
+    e.preventDefault();
+    try {
+      await fetch(`http://localhost:3000/notes/${editForm._id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(editForm)     //The Js object that has recently been in the editForm object will be added to the db
+      })
+    } catch (error) { console.log(error); }
+
+
+    // Changing the state(we have created a copy of original notes array, then find the index of updated note and set the old note with updated note and then finally put the updated notes array in front of the user)
+    const updateNotes = [...notes];
+    const updatedNoteIndex = notes.findIndex((note) => note._id === editForm._id)
+
+    updateNotes[updatedNoteIndex] = editForm;
+    setNotes(updateNotes);
+    setEditForm({ _id: "", title: "", body: "" })
+
+
+  }
+
+  const editNote = (note) => {
+    setEditForm({ _id: note._id, title: note.title, body: note.body });
+  }
 
 
   return (
@@ -85,11 +127,21 @@ const App = () => {
         <button type="submit">Create</button>
       </form>
 
+      <form onSubmit={updateNote}>
+        <input placeholder='Edit your note title' type="text" value={editForm.title} onChange={updateEditFormField} name='title' required={true} />
+        <br />
+        <textarea placeholder='Edit your note body' value={editForm.body} name="body" onChange={updateEditFormField} id="" cols="30" rows="10" required={true}></textarea>
+        <br />
+        <button type="submit">Update Note</button>
+      </form>
+
+
       {notes && notes.map((note) =>
         <div key={note._id}>
           <h1>{note.title}</h1>
           <h1>{note.body}</h1>
           <button onClick={() => deleteNote(note._id)}>Delete</button>
+          <button onClick={() => { editNote(note) }}>Edit</button>
         </div>
       )}
     </div>
