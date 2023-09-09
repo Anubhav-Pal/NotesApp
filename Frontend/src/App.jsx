@@ -68,13 +68,9 @@ const App = () => {
           'Content-Type': 'application/json',
         }
       })
-        .then(response => { return response.json() })
-        .catch((error) => console.log(error))
-
+      //Update the state
+      .then(setNotes((notes) => notes.filter((note) => note._id !== _id)))
     } catch (error) { console.log(error); }
-
-    //Update the state
-    setNotes((notes) => notes.filter((note) => note._id !== _id));
   }
 
 
