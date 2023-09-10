@@ -115,9 +115,9 @@ const App = () => {
 
 
   return (
-    <div>
-      <CreateNote title={createForm.title} body={createForm.body} onChangeFunction={updateCreateFormField} onSubmitFunction={createNote} />
-      <EditNote title={editForm.title} body={editForm.body} onChangeFunction={updateEditFormField} onSubmitFunction={updateNote} />
+    <div className='h-screen bg-zinc-900'>
+      {/* <CreateNote title={createForm.title} body={createForm.body} onChangeFunction={updateCreateFormField} onSubmitFunction={createNote} /> */}
+      {/* <EditNote title={editForm.title} body={editForm.body} onChangeFunction={updateEditFormField} onSubmitFunction={updateNote} /> */}
       <Note notes={notes} />
     </div>
   )
