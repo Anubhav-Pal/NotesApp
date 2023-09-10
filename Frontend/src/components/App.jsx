@@ -1,19 +1,16 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
+import Note from './Note.jsx'
+import CreateNote from './CreateNote.jsx'
+import EditNote from './EditNote.jsx'
 
 const App = () => {
 
   // States
   const [notes, setNotes] = useState([]);
-  const [createForm, setCreateFrom] = useState({
-    title: '',
-    body: ''
-  })
-  const [editForm, setEditForm] = useState({
-    _id: '',
-    title: '',
-    body: ''
-  })
+  const [createForm, setCreateFrom] = useState({ title: '', body: '' });
+  const [editForm, setEditForm] = useState({ _id: '', title: '', body: '' });
+
 
   // useeffects
   useEffect(() => {
@@ -119,31 +116,9 @@ const App = () => {
 
   return (
     <div>
-      <form onSubmit={createNote}>
-        <input type="text" value={createForm.title} onChange={updateCreateFormField} name='title' required={true} />
-        <br />
-        <textarea value={createForm.body} onChange={updateCreateFormField} name="body" id="" cols="30" rows="10" required={true}></textarea>
-        <br />
-        <button type="submit">Create</button>
-      </form>
-
-      <form onSubmit={updateNote}>
-        <input placeholder='Edit your note title' type="text" value={editForm.title} onChange={updateEditFormField} name='title' required={true} />
-        <br />
-        <textarea placeholder='Edit your note body' value={editForm.body} name="body" onChange={updateEditFormField} id="" cols="30" rows="10" required={true}></textarea>
-        <br />
-        <button type="submit">Update Note</button>
-      </form>
-
-
-      {notes && notes.map((note) =>
-        <div key={note._id}>
-          <h1>{note.title}</h1>
-          <h1>{note.body}</h1>
-          <button onClick={() => deleteNote(note._id)}>Delete</button>
-          <button onClick={() => { editNote(note) }}>Edit</button>
-        </div>
-      )}
+      <CreateNote title={createForm.title} body={createForm.body} onChangeFunction={updateCreateFormField} onSubmitFunction={createNote} />
+      <EditNote title={editForm.title} body={editForm.body} onChangeFunction={updateEditFormField} onSubmitFunction={updateNote} />
+      <Note notes={notes} />
     </div>
   )
 }
