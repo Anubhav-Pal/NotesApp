@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import Note from './Note.jsx'
 import CreateNote from './CreateNote.jsx'
 import EditNote from './EditNote.jsx'
+import Navbar from './Navbar.jsx'
 
 const App = () => {
 
@@ -116,7 +117,8 @@ const App = () => {
 
   return (
     <div className='h-screen bg-zinc-900 overflow-x-hidden  '>
-      {/* <CreateNote title={createForm.title} body={createForm.body} onChangeFunction={updateCreateFormField} onSubmitFunction={createNote} /> */}
+      {/* <Navbar /> */}
+      <CreateNote title={createForm.title} body={createForm.body} onChangeFunction={updateCreateFormField} onSubmitFunction={createNote} />
       {/* <EditNote title={editForm.title} body={editForm.body} onChangeFunction={updateEditFormField} onSubmitFunction={updateNote} /> */}
       <Note notes={notes} />
     </div>
