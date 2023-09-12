@@ -117,10 +117,10 @@ const App = () => {
 
   return (
     <div className='h-screen bg-zinc-900 overflow-x-hidden  '>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className='lg:mx-16 xl:mx-20'>
       <CreateNote title={createForm.title} body={createForm.body} onChangeFunction={updateCreateFormField} onSubmitFunction={createNote} />
-      {/* <EditNote title={editForm.title} body={editForm.body} onChangeFunction={updateEditFormField} onSubmitFunction={updateNote} /> */}
+      <EditNote title={editForm.title} body={editForm.body} onChangeFunction={updateEditFormField} onSubmitFunction={updateNote} />
       <Note notes={notes} editNote={editNote} deleteNote={deleteNote} />
       </div>
     </div>
