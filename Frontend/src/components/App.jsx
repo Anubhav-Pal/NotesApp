@@ -120,7 +120,7 @@ const App = () => {
       {/* <Navbar /> */}
       <CreateNote title={createForm.title} body={createForm.body} onChangeFunction={updateCreateFormField} onSubmitFunction={createNote} />
       {/* <EditNote title={editForm.title} body={editForm.body} onChangeFunction={updateEditFormField} onSubmitFunction={updateNote} /> */}
-      <Note notes={notes} />
+      <Note notes={notes} editNote={editNote} deleteNote={deleteNote} />
     </div>
   )
 }

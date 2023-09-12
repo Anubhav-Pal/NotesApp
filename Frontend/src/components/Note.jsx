@@ -14,8 +14,8 @@ const Note = (props) => {
           <div>
           <hr className='mt- opacity-10'/>
           <div className='pt-2   flex gap-4'>
-          <button className='opacity-40' onClick={() => deleteNote(note._id)}><FontAwesomeIcon icon={faTrash} /></button>
-          <button className='opacity-40' onClick={() => { editNote(note) }}><FontAwesomeIcon icon={faPenToSquare} /></button>
+          <button className='opacity-40' onClick={() => props.deleteNote(note._id)}><FontAwesomeIcon icon={faTrash} /></button>
+          <button className='opacity-40' onClick={() => { props.editNote(note) }}><FontAwesomeIcon icon={faPenToSquare} /></button>
           </div>
           </div>
 
